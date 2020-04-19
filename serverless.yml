@@ -25,6 +25,8 @@ provider:
 custom:
   serverless-offline:
     port: 8000
+environment:
+  EMAIL_PASSWD: ${env:EMAIL_PASSWD}
 
 functions:
   cron:
