@@ -6,6 +6,7 @@ package:
   individually: true
 
 plugins:
+  - serverless-offline-scheduler
   - serverless-bundle # Package our functions with Webpack
   - serverless-offline
   - serverless-dotenv-plugin # Load .env as environment variables
@@ -30,7 +31,6 @@ environment:
 
 functions:
   cron:
-    handler: index.handler
+    handler: index.cronEmail
     events:
-      - http: ANY /
-      - http: "ANY {proxy+}"
+      - schedule: rate(1 minute)

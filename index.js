@@ -1,26 +1,32 @@
-import serverless from "serverless-http";
-import express from "express";
-import cron from "node-cron";
+//import serverless from "serverless-http";
+//import express from "express";
+
 import nodeMailer from "nodemailer";
 
-const app = express();
+//const app = express();
 
 const transporter = nodeMailer.createTransport({
-  service: "gmail",
+  service: "yahoo",
   auth: {
-    user: "ewgodhand@gmail.com",
+    user: "infamous_godhand@yahoo.com",
     pass: process.env.EMAIL_PASSWD,
   },
 });
 const mailOptions = {
-  from: "ewgodhand@gmail.com",
-  to: "infamous_godhand@yahoo.com",
+  from: "infamous_godhand@yahoo.com",
+  to: "ewgodhand@gmail.com",
   subject: `Daily Email reminder`,
   text: `Hi there, this email was automatically sent by us`,
 };
 
-app.get("/", (req, res) => {
-  return res.send("Hello World!");
-});
+export const cronEmail = async () => {
+  console.log("I am running at every 1 mins");
 
-exports.handler = serverless(app);
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      throw error;
+    } else {
+      console.log("Email successfully sent!");
+    }
+  });
+};
