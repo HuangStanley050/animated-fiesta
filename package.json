@@ -15,7 +15,11 @@
   "devDependencies": {
     "serverless-bundle": "^1.2.5",
     "serverless-dotenv-plugin": "^2.1.1",
-    "serverless-offline": "^5.3.3"
+    "serverless-offline": "^5.3.3",
+    "serverless-offline-scheduler": "^0.4.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "express": "^4.17.1",
+    "serverless-http": "^2.3.2"
+  }
 }

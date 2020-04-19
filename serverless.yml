@@ -1,7 +1,7 @@
 # NOTE: update this with your service name
 service: cron-email
 
-# Create an optimized package for our functions 
+# Create an optimized package for our functions
 package:
   individually: true
 
@@ -14,7 +14,7 @@ provider:
   name: aws
   runtime: nodejs10.x
   stage: dev
-  region: us-east-1
+  region: ap-southeast-2
   # To load environment variables externally
   # rename env.example to .env and uncomment
   # the following line. Also, make sure to not
@@ -22,11 +22,13 @@ provider:
   #
   #environment:
   #  SAMPLE_ENV_VAR: ${env:SAMPLE_ENV_VAR}
+custom:
+  serverless-offline:
+    port: 8000
 
 functions:
-  hello:
-    handler: handler.hello
+  cron:
+    handler: index.handler
     events:
-      - http:
-          path: hello
-          method: get
+      - http: ANY /
+      - http: "ANY {proxy+}"
