@@ -28,6 +28,8 @@ custom:
     port: 8000
 environment:
   EMAIL_PASSWD: ${env:EMAIL_PASSWD}
+  UNSPLASH_KEY: ${env:UNSPLASH_KEY}
+  UNSPLASH_SECRET: ${env:UNSPLASH_SECRET}
 
 functions:
   cron:
