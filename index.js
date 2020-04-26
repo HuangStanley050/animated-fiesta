@@ -3,21 +3,15 @@
 
 import nodeMailer from "nodemailer";
 import axios from "axios";
+import sunTzu from "sun-tzu-quotes";
 //const app = express();
 
 export const cronEmail = async () => {
-  //console.log("I am running at every 1 mins");
-
   const imageRequest = `https://api.unsplash.com/photos/random?&client_id=${process.env.UNSPLASH_KEY}`;
-  const quoteRequest = `http://quotes.rest/qod.json?category=inspire`;
 
   let result = await axios.get(imageRequest);
-  let quote = await axios.get(quoteRequest);
 
-  // console.log(result.data.urls.regular);
-  // console.log(quote.data.contents.quotes[0].quote);
   const imageUrl = result.data.urls.regular;
-  const inspireQuote = quote.data.contents.quotes[0].quote;
 
   const emailTemplate = `
   <!doctype html>
@@ -31,12 +25,22 @@ export const cronEmail = async () => {
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
       <title>Motivational Email</title>
+      <style>
+          img {
+              display: block;
+              min-width:400px;
+              min-height:350px;
+              width: auto;
+              height: auto;
+            }
+      </style>
     </head>
+
     <body>
       <div class="container">
         <div class="jumbotron">
           <img src=${imageUrl}/>
-          <h1 class="display-4">${inspireQuote}</h1>
+
 
         </div>
       </div>
@@ -59,7 +63,7 @@ export const cronEmail = async () => {
   const mailOptions = {
     from: "infamous_godhand@yahoo.com",
     to: "ewgodhand@gmail.com",
-    subject: `Daily Email reminder`,
+    subject: `${sunTzu()}`,
     html: emailTemplate,
   };
 
