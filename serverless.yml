@@ -35,4 +35,4 @@ functions:
   cron:
     handler: index.cronEmail
     events:
-      - schedule: rate(1 day)
+      - schedule: rate(1 minute)

@@ -4,6 +4,7 @@
 import nodeMailer from "nodemailer";
 import axios from "axios";
 import sunTzu from "sun-tzu-quotes";
+//import util from "util";
 //const app = express();
 
 export const cronEmail = async () => {
@@ -66,12 +67,15 @@ export const cronEmail = async () => {
     subject: `${sunTzu()}`,
     html: emailTemplate,
   };
+  //const utilPromiseMail = util.promisify(transporter.sendMail);
+  await transporter.sendMail(mailOptions);
+  console.log("email sent");
 
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      throw error;
-    } else {
-      console.log("Email successfully sent!");
-    }
-  });
+  // transporter.sendMail(mailOptions, function (error, info) {
+  //   if (error) {
+  //     throw error;
+  //   } else {
+  //     console.log("Email successfully sent!");
+  //   }
+  // });
 };
