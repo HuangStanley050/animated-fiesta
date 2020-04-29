@@ -63,7 +63,7 @@ export const cronEmail = async () => {
   });
   const mailOptions = {
     from: "infamous_godhand@yahoo.com",
-    to: "ewgodhand@gmail.com",
+    to: "infamous_godhand@yahoo.com",
     subject: `${sunTzu()}`,
     html: emailTemplate,
   };
